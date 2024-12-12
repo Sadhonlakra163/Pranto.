@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CUSTOM SMS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #333;
+        }
+        .container {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 9px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 8px;
+            color: #666;
+        }
+        input[type="text"],
+        textarea {
+            padding: 10px;
+            margin-bottom: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        button[type="submit"]:focus {
+            outline: none;
+        }
+        .status-message {
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CASTOM SMS</h1>
+        <form id="bomber-form">
+            <label for="phone-number">Phone Number</label>
+            <input type="text" id="phone-number" name="phone-number" placeholder="Enter phone number" required>
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="4" placeholder="Enter your message" required></textarea>
+            <button type="submit">SEND SMS</button>
+            <div class="status-message" id="status-message"></div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('bomber-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            var phoneNumber = document.getElementById('phone-number').value;
+            var message = document.getElementById('message').value;
+
+            var smsBomberUrl = 'https://api/php?phone=' + encodeURIComponent(phoneNumber) + '&sms=' + encodeURIComponent(message);
+
+            fetch(smsBomberUrl)
+                .then(response => response.json())
+                .then(data => {
+                    var statusMessage = document.getElementById('status-message');
+                    if (data.status === 'success') {
+                        statusMessage.innerHTML = 'SMS sent successfully!';
+                        statusMessage.style.color = 'green';
+                    } else {
+                        statusMessage.innerHTML = 'Error: ' + data.message;
+                        statusMessage.style.color = 'red';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    var statusMessage = document.getElementById('status-message');
+    if ($response === false) {
+    echo '<script>alert("Failed to send SMS.");</script>';
+    } else {
+    echo '<script>alert("SMS sent successfully!");</script>'
+                });
+        });
+    </script>
+</body>
+</html>
